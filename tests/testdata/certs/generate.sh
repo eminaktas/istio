@@ -46,7 +46,8 @@ keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 extendedKeyUsage = clientAuth, serverAuth
 subjectAltName = @alt_names
 [alt_names]
-DNS = server.default.svc
+DNS.1 = server.default
+DNS.2 = server.default.svc
 EOF
 
 cat > "${WD}/server.conf" <<EOF
@@ -81,7 +82,8 @@ extendedKeyUsage = clientAuth, serverAuth
 subjectAltName = @alt_names
 [alt_names]
 URI = spiffe://cluster.local/ns/mounted-certs/sa/server
-DNS = server.mounted-certs.svc
+DNS.1 = server.mounted-certs
+DNS.2 = server.mounted-certs.svc
 EOF
 
 cat > "${WD}/mountedcerts-client.conf" <<EOF
@@ -96,7 +98,8 @@ extendedKeyUsage = clientAuth, serverAuth
 subjectAltName = @alt_names
 [alt_names]
 URI = spiffe://cluster.local/ns/mounted-certs/sa/client
-DNS = client.mounted-certs.svc
+DNS.1 = client.mounted-certs
+DNS.2 = client.mounted-certs.svc
 EOF
 
 

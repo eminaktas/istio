@@ -269,7 +269,7 @@ spec:
   resolution: DNS
 
 ---
-# Outbound TCP cluster, resolution DNS - for a '.svc' (in cluster) service.
+# Outbound TCP cluster, resolution DNS - for an in cluster service.
 # As an optimization, this can be converted to EDS
 # The new Sidecar is the recommended way to declare deps to mesh services - however
 # DNS resolution is supposed to continue to work.
@@ -280,7 +280,7 @@ metadata:
   namespace: none
 spec:
   hosts:
-  - tcpmeshdns.seexamples.svc
+  - tcpmeshdns.seexamples
   ports:
   - number: 2007
     protocol: TCP
@@ -290,7 +290,7 @@ spec:
 
 ---
 
-# Outbound TCP cluster, resolution STATIC - for a '.svc' (in cluster) service.
+# Outbound TCP cluster, resolution STATIC - for a in cluster service.
 # This binds on each endpoint address !
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -299,7 +299,7 @@ metadata:
   namespace: none
 spec:
   hosts:
-  - tcpmeshstatic.seexamples.svc
+  - tcpmeshstatic.seexamples
   ports:
   - number: 2008
     protocol: TCP
@@ -310,7 +310,7 @@ spec:
     ports:
       tcp1: 7070
 ---
-# Outbound TCP cluster, resolution STATIC - for a '.svc' (in cluster) service.
+# Outbound TCP cluster, resolution STATIC - for an in cluster service.
 # This generates EDS
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
@@ -319,7 +319,7 @@ metadata:
   namespace: none
 spec:
   hosts:
-  - tcpmeshstaticint.seexamples.svc
+  - tcpmeshstaticint.seexamples
   ports:
   - number: 2009
     protocol: TCP

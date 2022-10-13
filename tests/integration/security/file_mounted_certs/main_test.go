@@ -197,8 +197,8 @@ values:
       # We need to turn off the XDS Auth because test certificates only have a fixed/hardcoded identity, but the identity of the actual
       # deployed test services changes on each run due to a randomly generated namespace suffixes.
       # Turning the XDS-Auth ON will result in the error messages like:
-      # Unauthorized XDS: 10.1.0.159:41960 with identity [spiffe://cluster.local/ns/mounted-certs/sa/client client.mounted-certs.svc]:
-      #    no identities ([spiffe://cluster.local/ns/mounted-certs/sa/client client.mounted-certs.svc]) matched istio-fd-sds-1-4523/default
+      # Unauthorized XDS: 10.1.0.159:41960 with identity [spiffe://cluster.local/ns/mounted-certs/sa/client client.mounted-certs client.mounted-certs.svc]:
+      #    no identities ([spiffe://cluster.local/ns/mounted-certs/sa/client client.mounted-certs client.mounted-certs.svc]) matched istio-fd-sds-1-4523/default
       XDS_AUTH: "false"
 `
 
@@ -302,7 +302,7 @@ func ReadCustomCertFromFile(certsPath string, f string) ([]byte, error) {
 func setupApps(ctx resource.Context, customNs namespace.Getter, customCfg *[]echo.Config) error {
 	appsNamespace := customNs.Get()
 
-	// Server certificate has "server.file-mounted.svc" in SANs; Same is expected in DestinationRule.subjectAltNames for the test Echo server
+	// Server certificate has "server.file-mounted" in SANs; Same is expected in DestinationRule.subjectAltNames for the test Echo server
 	// This cert is going to be used as a server and "client" certificate on the "Echo Server"'s side
 	err := CreateCustomSecret(ctx, ServerSecretName, appsNamespace, ServerCertsPath)
 	if err != nil {
